@@ -5,8 +5,8 @@ project(FIR_filter)
 set(CMAKE_BUILD_TYPE "Release")
 
 add_library(${PROJECT_NAME} SHARED
-    BVector_Filter.cpp
+    src/BVector_Filter.cpp
 )
 
-add_executable(main BVector_FIlter_Test.cpp)
+add_executable(main src/BVector_Filter_Test.cpp)
 target_link_libraries(main ${PROJECT_NAME})

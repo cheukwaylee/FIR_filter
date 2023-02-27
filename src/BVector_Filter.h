@@ -1,36 +1,32 @@
 #ifndef __BVECTOR_FILTER_H__
 #define __BVECTOR_FILTER_H__
 
-#include <iostream>
 #include <stdio.h>
+#include <string.h>
+#include <iostream>
 #include <fstream>
 #include <sstream>
 #include <iomanip>
 #include <complex>
-#include "math.h"
-#include <cstdlib>
-#include <string.h>
 #include <vector>
+#include <math.h>
+#include <cstdlib>
 
 using namespace std;
 
-// the input matrix is the initial matrix has been tranposed
+// the input matrix is the initial matrix has been transposed
 #define NUM_ROW 61440
 #define NUM_COLUM 32
 #define NUM_COEFF 257
 #define ERR 0.000001
 
-// used to assign the unroll and cyclic factor for pragma
-#ifndef MAC_unroll_factor
-#define MAC_unroll_factor 1
+// HLS pragma DSE
+#ifndef MAC_UNROLL_FACTOR
+#define MAC_UNROLL_FACTOR 16 // 1, 2, 4, 8, 16, 32, 64, 128, 256
 #endif
 
-#ifndef Z_cyclic_factor
-#define Z_cyclic_factor 1
-#endif
-
-#ifndef SHIFT_unroll_factor
-#define Z_SHIFT_unroll_factor 1
+#ifndef Z_DIM2_CYCLIC_ENABLE
+#define Z_DIM2_CYCLIC_ENABLE 1 // 0, 1
 #endif
 
 typedef complex<double> data_c;
