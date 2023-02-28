@@ -40,8 +40,8 @@ int main()
 	}
 
 	// read input from file which is same as Matlab input
-	std::vector<data_d> inputTR = readFile("../data/input_real.bin");
-	std::vector<data_d> inputTI = readFile("../data/input_imag.bin");
+	std::vector<data_d> inputTR = readFile("input_real.bin");
+	std::vector<data_d> inputTI = readFile("input_imag.bin");
 
 	// Transpose the bin matrix
 	for (int j = 0; j < NUM_COLUM; j++)
@@ -66,8 +66,8 @@ int main()
 	Top((data_c *)in_data, (data_c *)out_data, in_coeff, NUM_ROW);
 
 	// read output from  Matlab input
-	std::vector<data_d> outputTR = readFile("../data/output_real.bin");
-	std::vector<data_d> outputTI = readFile("../data/output_imag.bin");
+	std::vector<data_d> outputTR = readFile("output_real.bin");
+	std::vector<data_d> outputTI = readFile("output_imag.bin");
 
 	// Transpose the bin matrix
 	for (int j = 0; j < NUM_COLUM; j++)

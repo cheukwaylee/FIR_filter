@@ -59,7 +59,7 @@ void Fir(data_c X[NUM_COLUM], data_c Y[NUM_COLUM], data_d B[NUM_COEFF])
     static data_c Z[NUM_COLUM][NUM_COEFF - 1]; // 32-by-256
 #pragma HLS ARRAY_PARTITION variable = Z type = complete dim = 1
 #if Z_DIM2_CYCLIC_ENABLE == 1
-#pragma HLS ARRAY_PARTITION variable = Z type = MAC_UNROLL_FACTOR dim = 2
+#pragma HLS ARRAY_PARTITION variable = Z type = cyclic factor = MAC_unroll_factor dim = 2
 #endif
 
     data_c part_sum[NUM_COLUM];
@@ -81,7 +81,7 @@ MAC: // multi-accumulator
     for (int i = NUM_COEFF - 1; i != 0; i--)
     {
 #pragma HLS pipeline II = 1
-#pragma HLS unroll factor = MAC_UNROLL_FACTOR // max=256
+#pragma HLS unroll factor = MAC_unroll_factor // max=256
 
         // i (old->new): 256: -1: 1
         // i_complement: 0  :  1: 255
@@ -97,7 +97,7 @@ MAC: // multi-accumulator
             part_sum[j].real(part_sum[j].real() + Z[j][current_Z_idx].real() * B[i]);
             part_sum[j].imag(part_sum[j].imag() + Z[j][current_Z_idx].imag() * B[i]);
 
-            if (i % MAC_UNROLL_FACTOR == 1)
+            if ((i % MAC_unroll_factor == 1) || (MAC_unroll_factor == 1))
             {
                 Y[j].real(Y[j].real() + part_sum[j].real());
                 Y[j].imag(Y[j].imag() + part_sum[j].imag());

@@ -22,11 +22,12 @@ using namespace std;
 
 // HLS pragma DSE
 #ifndef MAC_UNROLL_FACTOR
-#define MAC_UNROLL_FACTOR 16 // 1, 2, 4, 8, 16, 32, 64, 128, 256
+#define MAC_UNROLL_FACTOR 1 // 1, 2, 4, 8, 16, 32, 64, 128, 256
 #endif
+const int MAC_unroll_factor = MAC_UNROLL_FACTOR; // TODO?? MARCO def cannot be used as Pragma factor directly??
 
 #ifndef Z_DIM2_CYCLIC_ENABLE
-#define Z_DIM2_CYCLIC_ENABLE 1 // 0, 1
+#define Z_DIM2_CYCLIC_ENABLE 0 // 0, 1
 #endif
 
 typedef complex<double> data_c;
